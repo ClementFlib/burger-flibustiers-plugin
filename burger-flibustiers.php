@@ -6,6 +6,9 @@ Version: 2.0
 Author: Clément GUEZOU - Développeur web chez Les Flibustiers
 */
 
+// Permet de vérifier la version pour MAJ auto du plugin
+require 'includes/plugin-update-checker/plugin-update-checker.php';
+
 // Inclut les fichiers nécessaires
 include plugin_dir_path(__FILE__) . 'includes/settings-register.php';
 include plugin_dir_path(__FILE__) . 'includes/settings-page.php';
