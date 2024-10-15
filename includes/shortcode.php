@@ -58,7 +58,7 @@ function burger_menu_shortcode($atts) {
                     case 'linkedin':
                         echo '<span class="dashicons dashicons-linkedin"></span>';
                         break;
-                    case 'x':
+                    case 'twitter':
                         echo '<span class="dashicons dashicons-twitter-x-alt"></span>';
                         break;
                 }
