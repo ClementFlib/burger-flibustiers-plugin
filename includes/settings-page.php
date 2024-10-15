@@ -7,7 +7,6 @@ function burger_flibustiers_add_admin_menu() {
         'burger_flibustiers_settings',      // Slug de la page
         'burger_flibustiers_settings_page', // Fonction de rappel pour afficher le contenu
         'dashicons-menu-alt',               // Icône du menu
-        20                                  // Position du menu dans l’admin
     );
 }
 add_action('admin_menu', 'burger_flibustiers_add_admin_menu');

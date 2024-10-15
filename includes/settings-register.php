@@ -36,8 +36,23 @@ function burger_flibustiers_settings_init() {
         'burgerFlibustiers',
         'burger_flibustiers_section'
     );
+
+    // Animation d'ouverture
+    add_settings_field(
+        'burger_flibustiers_animation',
+        'Animation d\'ouverture',
+        'burger_flibustiers_animation_render',
+        'burgerFlibustiers',
+        'burger_flibustiers_section'
+    );
+    
 }
 add_action('admin_init', 'burger_flibustiers_settings_init');
+
+// Description de la section
+function burger_flibustiers_section_callback() {
+    echo 'Personnalisez l’apparence de votre menu burger ici.';
+}
 
 // Rendu du champ couleur
 function burger_flibustiers_color_render() {
@@ -48,7 +63,7 @@ function burger_flibustiers_color_render() {
     <?php
 }
 
-// Fonction de rendu pour la liste déroulante de la police de caractères
+// Rendu pour la liste déroulante de la police de caractères
 function burger_flibustiers_font_render() {
     $options = get_option('burger_flibustiers_options');
     $selected_font = isset($options['burger_flibustiers_font']) ? $options['burger_flibustiers_font'] : 'default';
@@ -91,7 +106,27 @@ function burger_flibustiers_bgcolor_render() {
     <?php
 }
 
-// Description de la section
-function burger_flibustiers_section_callback() {
-    echo 'Personnalisez l’apparence de votre menu burger ici.';
+// Rendu pour la sélection d'animation
+function burger_flibustiers_animation_render() {
+    $options = get_option('burger_flibustiers_options');
+    $selected_animation = isset($options['burger_flibustiers_animation']) ? $options['burger_flibustiers_animation'] : 'burger-slide-right';
+
+    $animations = array(
+        'slide-from-top'    => 'Glissement depuis le haut',
+        'slide-from-right'  => 'Glissement depuis la droite',
+        'slide-from-bottom' => 'Glissement depuis le bas',
+        'slide-from-left'   => 'Glissement depuis la gauche',
+        'fade-in'           => 'Fondu',
+    );
+    ?>
+
+    <select name="burger_flibustiers_options[burger_flibustiers_animation]">
+        <?php foreach ($animations as $value => $label): ?>
+            <option value="<?php echo esc_attr($value); ?>" <?php selected($selected_animation, $value); ?>>
+                <?php echo esc_html($label); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <p class="description">Choisissez l'animation d'ouverture du menu burger.</p>
+    <?php
 }

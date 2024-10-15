@@ -21,8 +21,6 @@
 /* Menu burger caché initialement */
 #burger-menu {
   position: fixed;
-  top: 0;
-  right: -100%; /* Caché à droite */
   width: 33%;
   height: 100%;
   color: white;
@@ -32,17 +30,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: right 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 /* Liste du menu */
 .burger-menu-list{
-  padding: 0;
+  padding: 0 !important;
 }
 
 .burger-menu-list li {
   list-style: none;
-  margin: 20px 0 40px;
+  margin: 20px 0;
+}
+
+.burger-menu-list li:last-child {
+  margin-bottom: 0;
 }
 
 .burger-menu-list li a {
@@ -53,10 +55,12 @@
   font-weight: 700;
 }
 
-/* Animation d'ouverture */
-#burger-menu.open {
-  right: 0; /* Menu visible */
-  box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.2);
+.burger-menu-list .sub-menu{
+  padding: 0 0 30px 0 !important;
+}
+
+.burger-menu-list .sub-menu li a{
+  font-size: 28px;
 }
 
 /* Effet de croix pour l'icône du menu quand ouvert */
@@ -88,4 +92,56 @@
   .burger-menu-list li a {
       font-size: 20px;
   }
+  .burger-menu-list .sub-menu li a{
+    font-size: 16px;
+  }
+}
+
+/* Classes de position pour le menu */
+.slide-from-top{
+  left: 0;
+  top: -100%;
+}
+
+.slide-from-right{
+  top: 0;
+  right: -100%;
+}
+
+.slide-from-bottom{
+  left: 0;
+  bottom: -100%;
+}
+
+.slide-from-left{
+  top: 0;
+  left: -100%;
+}
+
+.fade-in{
+  opacity: 0;
+  inset: 0 0 0 0;
+  visibility: hidden;
+}
+
+/* Animations d'ouverture */
+.slide-from-top.open {
+  top: 0;
+}
+
+.slide-from-right.open {
+  right: 0;
+}
+
+.slide-from-bottom.open {
+  bottom: 0;
+}
+
+.slide-from-left.open {
+  left: 0;
+}
+
+.fade-in.open {
+  opacity: 1;
+  visibility: visible;
 }
