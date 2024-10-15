@@ -39,6 +39,34 @@ function burger_menu_shortcode($atts) {
 			'container' => false,
 			'menu_class' => 'burger-menu-list'
 		));
+
+        $socials = get_option('burger_flibustiers_social_links', []);
+        if ($socials) {
+            echo '<div class="social-links">';
+            foreach ($socials as $social) {
+                echo '<a href="' . esc_url($social['url']) . '" target="_blank" class="social-link-' . esc_attr($social['network']) . '">';
+                switch ($social['network']) {
+                    case 'facebook':
+                        echo '<span class="dashicons dashicons-facebook-alt"></span>';
+                        break;
+                    case 'youtube':
+                        echo '<span class="dashicons dashicons-video-alt3"></span>';
+                        break;
+                    case 'instagram':
+                        echo '<span class="dashicons dashicons-camera"></span>';
+                        break;
+                    case 'linkedin':
+                        echo '<span class="dashicons dashicons-linkedin"></span>';
+                        break;
+                    case 'x':
+                        echo '<span class="dashicons dashicons-twitter"></span>';
+                        break;
+                }
+                echo '</a>';
+            }
+            echo '</div>';
+        }
+
         ?>
     </div>
     <?php

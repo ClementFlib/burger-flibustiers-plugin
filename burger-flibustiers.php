@@ -22,6 +22,13 @@ function enqueue_burger_flibustiers_assets() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_burger_flibustiers_assets');
 
+// Charge la bibliothèque dashicons de WP pour les boutons RS
+function load_dashicons_front_end() {
+    wp_enqueue_style('dashicons');
+}
+add_action('wp_enqueue_scripts', 'load_dashicons_front_end');
+
+// Namespace de la librairie de PUC -> plugin pour maj auto
 use YahnisElsts\PluginUpdateChecker\v5p4\PucFactory;
 
 $updateChecker = PucFactory::buildUpdateChecker(

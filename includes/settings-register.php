@@ -130,3 +130,66 @@ function burger_flibustiers_animation_render() {
     <p class="description">Choisissez l'animation d'ouverture du menu burger.</p>
     <?php
 }
+
+/*************** RESEAUX SOCIAUX *******************/
+register_setting('burgerFlibustiers', 'burger_flibustiers_social_links', [
+    'sanitize_callback' => 'sanitize_social_links'
+]);
+// Sécurise les liens
+function sanitize_social_links($input) {
+    $sanitized = [];
+    foreach ($input as $social) {
+        $sanitized[] = [
+            'network' => sanitize_text_field($social['network']),
+            'url' => esc_url_raw($social['url'])
+        ];
+    }
+    return $sanitized;
+}
+
+// Rendu des champs de gestion des liens RS
+function burger_flibustiers_social_links_render() {
+    $options = get_option('burger_flibustiers_social_links', []);
+
+    $social_networks = [
+        'facebook'  => 'Facebook',
+        'youtube'   => 'YouTube',
+        'instagram' => 'Instagram',
+        'linkedin'  => 'LinkedIn',
+        'x'         => 'X'
+    ];
+
+    // Affiche les réseaux sociaux existants
+    foreach ($options as $index => $social) {
+        ?>
+        <div class="social-link">
+            <select name="burger_flibustiers_social_links[<?php echo $index; ?>][network]">
+                <?php foreach ($social_networks as $key => $label): ?>
+                    <option value="<?php echo esc_attr($key); ?>" <?php selected($social['network'], $key); ?>>
+                        <?php echo esc_html($label); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <input type="url" name="burger_flibustiers_social_links[<?php echo $index; ?>][url]" value="<?php echo esc_url($social['url']); ?>" placeholder="URL du réseau">
+            <button type="button" class="remove-social-link button">Supprimer</button>
+        </div>
+        <?php
+    }
+
+    ?>
+    <div id="new-social-link-template" style="display:none;">
+        <select name="burger_flibustiers_social_links[index_placeholder][network]">
+            <?php foreach ($social_networks as $key => $label): ?>
+                <option value="<?php echo esc_attr($key); ?>"><?php echo esc_html($label); ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="url" name="burger_flibustiers_social_links[index_placeholder][url]" placeholder="URL du réseau">
+        <button type="button" class="remove-social-link button">Supprimer</button>
+    </div>
+    <button type="button" id="add-social-link" class="button">Ajouter un réseau</button>
+
+    <script>
+        addAndRemoveSocialLinks(<?php echo count($options); ?>);
+    </script>
+    <?php
+}

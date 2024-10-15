@@ -56,7 +56,7 @@
 }
 
 .burger-menu-list .sub-menu{
-  padding: 0 0 30px 0 !important;
+  padding: 0 0 0 30px !important;
 }
 
 .burger-menu-list .sub-menu li a{
@@ -86,7 +86,6 @@
 
 @media(max-width: 600px){
   #burger-menu{
-      padding-top: 120px;
       overflow-y: scroll;
   }
   .burger-menu-list li a {
@@ -144,4 +143,25 @@
 .fade-in.open {
   opacity: 1;
   visibility: visible;
+}
+
+/* Icones de réseaux sociaux */
+.social-links a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 20px;
+}
+
+.social-link-facebook { background-color: #3b5998; }
+.social-link-youtube { background-color: #ff0000; }
+.social-link-instagram { background-color: #c13584; }
+.social-link-linkedin { background-color: #0077b5; }
+.social-link-twitter { background-color: #1da1f2; }
+
+.social-links .dashicons {
+  vertical-align: middle;
 }
