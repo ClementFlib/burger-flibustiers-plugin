@@ -2,6 +2,9 @@
 // Enregistre les réglages pour le menu burger
 function burger_flibustiers_settings_init() {
     register_setting('burgerFlibustiers', 'burger_flibustiers_options');
+    register_setting('burgerFlibustiers', 'burger_flibustiers_social_links', [
+        'sanitize_callback' => 'sanitize_social_links'
+    ]);
 
     add_settings_section(
         'burger_flibustiers_section',
@@ -12,11 +15,11 @@ function burger_flibustiers_settings_init() {
 
     //Couleur de la font
     add_settings_field(
-        'burger_flibustiers_color',
-        'Couleur de la police du menu',
-        'burger_flibustiers_color_render',
-        'burgerFlibustiers',
-        'burger_flibustiers_section'
+        'burger_flibustiers_color',             // ID du champ
+        'Couleur de la police du menu',         // Titre du champ
+        'burger_flibustiers_color_render',      // Fonction de rappel pour afficher les champs
+        'burgerFlibustiers',                    // Page d'options
+        'burger_flibustiers_section'            // Section à laquelle ce champ appartient
     );
 
     // Font family
@@ -42,6 +45,15 @@ function burger_flibustiers_settings_init() {
         'burger_flibustiers_animation',
         'Animation d\'ouverture',
         'burger_flibustiers_animation_render',
+        'burgerFlibustiers',
+        'burger_flibustiers_section'
+    );
+
+    // Champ pour les réseaux sociaux
+    add_settings_field(
+        'burger_flibustiers_social_links',
+        'Liens vers les réseaux sociaux',
+        'burger_flibustiers_social_links_render',
         'burgerFlibustiers',
         'burger_flibustiers_section'
     );
@@ -132,9 +144,6 @@ function burger_flibustiers_animation_render() {
 }
 
 /*************** RESEAUX SOCIAUX *******************/
-register_setting('burgerFlibustiers', 'burger_flibustiers_social_links', [
-    'sanitize_callback' => 'sanitize_social_links'
-]);
 // Sécurise les liens
 function sanitize_social_links($input) {
     $sanitized = [];
