@@ -1,5 +1,7 @@
 //Code destiné au backoffice et pas au front du site
 function addAndRemoveSocialLinks() {
+    console.log('here');
+
     let index = document.querySelectorAll('.social-link').length;
     const container = document.querySelector('#add-social-link').parentNode;
 

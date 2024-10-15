@@ -2,7 +2,7 @@
 /*
 Plugin Name: Burger Flibustiers
 Description: Plugin pour ajouter un menu burger dynamique avec un shortcode.
-Version: 2.2.3
+Version: 2.2.4
 Author: Clément GUEZOU - Développeur web chez Les Flibustiers
 */
 
@@ -23,6 +23,7 @@ function enqueue_burger_flibustiers_assets() {
 add_action('wp_enqueue_scripts', 'enqueue_burger_flibustiers_assets');
 
 function enqueue_burger_flibustiers_admin_assets($hook) {
+    error_log($hook);
     // Le slug de la page de réglages
     if ($hook !== 'burger_flibustiers_settings') {
         return;
