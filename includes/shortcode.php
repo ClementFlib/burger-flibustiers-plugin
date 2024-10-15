@@ -25,13 +25,13 @@ function burger_menu_shortcode($atts) {
 
     // Code HTML pour le menu burger
     ?>
-    <div id="burger-menu-icon" class="<?php echo esc_attr($animation_class); ?>">
+    <div id="burger-menu-icon">
         <span></span>
         <span></span>
         <span></span>
     </div>
 
-    <div id="burger-menu">
+    <div id="burger-menu" class="<?php echo esc_attr($animation_class); ?>">
         <?php
         // Affiche le menu WordPress Apparences > Menu
         wp_nav_menu(array(
