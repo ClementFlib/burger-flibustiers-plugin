@@ -156,11 +156,13 @@
   font-size: 20px;
 }
 
-.social-link-facebook { background-color: #3b5998; }
-.social-link-youtube { background-color: #ff0000; }
-.social-link-instagram { background-color: #c13584; }
-.social-link-linkedin { background-color: #0077b5; }
-.social-link-twitter { background-color: #1da1f2; }
+.social-link-facebook,
+.social-link-youtube,
+.social-link-instagram,
+.social-link-linkedin,
+.social-link-twitter
+ { background-color: currentColor; }
+
 
 .social-links .dashicons {
   vertical-align: middle;

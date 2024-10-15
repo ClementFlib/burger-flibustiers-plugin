@@ -147,12 +147,17 @@ function burger_flibustiers_animation_render() {
 // Sécurise les liens
 function sanitize_social_links($input) {
     $sanitized = [];
+    
     foreach ($input as $social) {
-        $sanitized[] = [
-            'network' => sanitize_text_field($social['network']),
-            'url' => esc_url_raw($social['url'])
-        ];
+        // Vérifie que le réseau social et l'URL ne sont pas vides
+        if (!empty($social['network']) && !empty($social['url'])) {
+            $sanitized[] = [
+                'network' => sanitize_text_field($social['network']),
+                'url' => esc_url_raw($social['url'])
+            ];
+        }
     }
+    
     return $sanitized;
 }
 

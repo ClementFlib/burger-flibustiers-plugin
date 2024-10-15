@@ -47,19 +47,19 @@ function burger_menu_shortcode($atts) {
                 echo '<a href="' . esc_url($social['url']) . '" target="_blank" class="social-link-' . esc_attr($social['network']) . '">';
                 switch ($social['network']) {
                     case 'facebook':
-                        echo '<span class="dashicons dashicons-facebook-alt"></span>';
+                        echo '<span class="dashicons dashicons-facebook"></span>';
                         break;
                     case 'youtube':
-                        echo '<span class="dashicons dashicons-video-alt3"></span>';
+                        echo '<span class="dashicons dashicons-youtube"></span>';
                         break;
                     case 'instagram':
-                        echo '<span class="dashicons dashicons-camera"></span>';
+                        echo '<span class="dashicons dashicons-instagram"></span>';
                         break;
                     case 'linkedin':
                         echo '<span class="dashicons dashicons-linkedin"></span>';
                         break;
                     case 'x':
-                        echo '<span class="dashicons dashicons-twitter"></span>';
+                        echo '<span class="dashicons dashicons-twitter-x-alt"></span>';
                         break;
                 }
                 echo '</a>';
