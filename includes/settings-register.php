@@ -161,14 +161,13 @@ function burger_flibustiers_social_links_render() {
     $options = get_option('burger_flibustiers_social_links', []);
 
     $social_networks = [
-        'facebook'  => 'Facebook',
-        'youtube'   => 'YouTube',
+        'facebook' => 'Facebook',
+        'youtube' => 'YouTube',
         'instagram' => 'Instagram',
-        'linkedin'  => 'LinkedIn',
-        'x'         => 'X'
+        'linkedin' => 'LinkedIn',
+        'twitter' => 'Twitter'
     ];
 
-    // Affiche les réseaux sociaux existants
     foreach ($options as $index => $social) {
         ?>
         <div class="social-link">
@@ -196,9 +195,5 @@ function burger_flibustiers_social_links_render() {
         <button type="button" class="remove-social-link button">Supprimer</button>
     </div>
     <button type="button" id="add-social-link" class="button">Ajouter un réseau</button>
-
-    <script>
-        addAndRemoveSocialLinks(<?php echo count($options); ?>);
-    </script>
     <?php
 }
