@@ -44,7 +44,7 @@ function burger_menu_shortcode($atts) {
         if ($socials) {
             echo '<div class="social-links">';
             foreach ($socials as $social) {
-                echo '<a href="' . esc_url($social['url']) . '" target="_blank" class="social-link-' . esc_attr($social['network']) . '">';
+                echo '<a href="' . esc_url($social['url']) . '" target="_blank" class="social-link social-link-' . esc_attr($social['network']) . '">';
                 switch ($social['network']) {
                     case 'facebook':
                         echo '<span class="dashicons dashicons-facebook"></span>';
