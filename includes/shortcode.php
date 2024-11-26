@@ -1,29 +1,40 @@
 <?php
-//Utiliser [burger_menu] pour appeler ce shortcode
+// Utiliser [burger_menu] pour appeler ce shortcode
 function burger_menu_shortcode($atts) {
-
     $options = get_option('burger_flibustiers_options');
-    $animation_class = isset($options['burger_flibustiers_animation']) ? $options['burger_flibustiers_animation'] : 'burger-slide-right';
+    $animation_class = isset($options['burger_flibustiers_animation']) ? $options['burger_flibustiers_animation'] : 'slide-from-right';
 
     $atts = shortcode_atts(array(
-        'menu' => '', // Le nom du menu tel qu'enregistré dans le backoffice WordPress
+        'menu' => '', // Nom du menu tel qu'enregistré dans WordPress
     ), $atts);
 
-    // Si aucun nom de menu n'est spécifié, utilise le menu principal par défaut
+    // Si aucun menu n'est spécifié, utilise le menu principal
     if (empty($atts['menu'])) {
-        // Récupère les emplacements de menu enregistrés
         $locations = get_nav_menu_locations();
-
-        // Vérifie si un menu est assigné à l'emplacement 'primary' (ou l'emplacement voulu)
         if (isset($locations['primary'])) {
             $menu_object = wp_get_nav_menu_object($locations['primary']);
-            $atts['menu'] = $menu_object->name; // Utilise le nom du menu principal
+            $atts['menu'] = $menu_object->name;
         }
     }
 
-    ob_start(); // Démarre la temporisation de sortie pour capturer le contenu PHP
+    // Récupérer les éléments du menu
+    $menu_items = wp_get_nav_menu_items($atts['menu']);
+    if (!$menu_items) {
+        return '<p>Menu introuvable.</p>';
+    }
 
-    // Code HTML pour le menu burger
+    // Organiser les éléments du menu par parent
+    $menu_tree = [];
+    foreach ($menu_items as $item) {
+        $parent_id = $item->menu_item_parent;
+        if (!isset($menu_tree[$parent_id])) {
+            $menu_tree[$parent_id] = [];
+        }
+        $menu_tree[$parent_id][] = $item;
+    }
+
+    // Générer le HTML récursivement
+    ob_start();
     ?>
     <div id="burger-menu-icon">
         <span></span>
@@ -32,46 +43,41 @@ function burger_menu_shortcode($atts) {
     </div>
 
     <div id="burger-menu" class="<?php echo esc_attr($animation_class); ?>">
-        <?php
-        // Affiche le menu WordPress Apparences > Menu
-        wp_nav_menu(array(
-			'menu' => $atts['menu'],
-			'container' => false,
-			'menu_class' => 'burger-menu-list'
-		));
 
-        $socials = get_option('burger_flibustiers_social_links', []);
-        if ($socials) {
-            echo '<div class="social-links">';
-            foreach ($socials as $social) {
-                echo '<a href="' . esc_url($social['url']) . '" target="_blank" class="social-link social-link-' . esc_attr($social['network']) . '">';
-                switch ($social['network']) {
-                    case 'facebook':
-                        echo '<span class="dashicons dashicons-facebook"></span>';
-                        break;
-                    case 'youtube':
-                        echo '<span class="dashicons dashicons-youtube"></span>';
-                        break;
-                    case 'instagram':
-                        echo '<span class="dashicons dashicons-instagram"></span>';
-                        break;
-                    case 'linkedin':
-                        echo '<span class="dashicons dashicons-linkedin"></span>';
-                        break;
-                    case 'twitter':
-                        echo '<span class="dashicons dashicons-twitter-x-alt"></span>';
-                        break;
-                }
-                echo '</a>';
-            }
-            echo '</div>';
-        }
-
-        ?>
+        <?php echo generate_menu_html_recursive($menu_tree, 0, $animation_class); ?>
     </div>
+    
     <?php
-
-    return ob_get_clean(); // Retourne le contenu capturé
+    return ob_get_clean();
 }
 
+// Fonction récursive pour générer le HTML
+function generate_menu_html_recursive($menu_tree, $parent_id, $class) {
+    if (!isset($menu_tree[$parent_id])) {
+        return ''; // Aucun enfant pour ce parent
+    }
+
+    $output = '<ul class="menu-level burger-menu-list">';
+    foreach ($menu_tree[$parent_id] as $item) {
+        $has_children = isset($menu_tree[$item->ID]);
+
+        $output .= '<li class="menu-item" data-item-id="' . esc_attr($item->ID) . '">';
+        $output .= '<a href="' . esc_url($item->url) . '" class="menu-link">' . esc_html($item->title) . '</a>';
+
+        // Si l'élément a des enfants, appeler la fonction récursive
+        if ($has_children) {
+            $output .= '<div class="' . $class . ' submenu-container" data-submenu-id="' . esc_attr($item->ID) . '">';
+            $output .= '<div class="backdash">Retour</div>';
+            $output .= generate_menu_html_recursive($menu_tree, $item->ID, $class);
+            $output .= '</div>';
+        }
+
+        $output .= '</li>';
+    }
+    $output .= '</ul>';
+
+    return $output;
+}
+
+// Enregistrer le shortcode
 add_shortcode('burger_menu', 'burger_menu_shortcode');

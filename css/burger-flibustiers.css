@@ -19,7 +19,7 @@
 }
 
 /* Menu burger caché initialement */
-#burger-menu {
+#burger-menu, .submenu-container {
   position: fixed;
   width: 33%;
   height: 100%;
@@ -79,13 +79,13 @@
 }
 
 @media(max-width: 1024px){
-  #burger-menu{
+  #burger-menu, .submenu-container{
       width: 100%;
   }
 }
 
 @media(max-width: 600px){
-  #burger-menu{
+  #burger-menu, .submenu-container{
       overflow-y: scroll;
   }
   .burger-menu-list li a {
@@ -150,22 +150,61 @@
   display: inline-block;
   padding: 5px 10px;
   margin-right: 5px;
-  color: transparent;
+  color: #fff;
   text-decoration: none;
   border-radius: 3px;
   font-size: 20px;
 }
 
-.social-link { 
-  background-color: currentColor; 
-}
+.social-link-facebook,
+.social-link-youtube,
+.social-link-instagram,
+.social-link-linkedin,
+.social-link-twitter
+ { background-color: currentColor; }
 
 
 .social-links .dashicons {
   vertical-align: middle;
 }
 
-.social-links .dashicons::before {
-  color: #FFF;
-  font-size: 35px;
+.menu-level {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-item:has(.submenu-container)::after{
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #FFF;
+  border-right: 2px solid #FFF;
+  transform: rotate(45deg);
+  vertical-align: middle;
+  margin: 0 0 8px 8px;
+}
+
+.backdash{
+  padding-left: 20px;
+  position: absolute;
+  top: 35px;
+  left: 30px;
+}
+
+.backdash::before{
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #FFF;
+  border-right: 2px solid #FFF;
+  transform: rotate(-135deg);
+  vertical-align: middle;
+  margin: 0 8px 8px 0;
 }
