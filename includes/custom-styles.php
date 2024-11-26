@@ -9,10 +9,10 @@ function burger_flibustiers_apply_custom_styles() {
     ?>
 
     <style type="text/css">
-        #burger-menu {
+        #burger-menu, .submenu-container {
             background-color: <?php echo $bgcolor; ?>;
         }
-        .burger-menu-list li a {
+        .burger-menu-list li a, .backdash {
             color: <?php echo $color; ?>;
             <?php if ($font): ?>
                 font-family: <?php echo $font; ?>;
