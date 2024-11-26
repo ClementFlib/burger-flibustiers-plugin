@@ -170,7 +170,6 @@ function burger_flibustiers_social_links_render() {
         'youtube' => 'YouTube',
         'instagram' => 'Instagram',
         'linkedin' => 'LinkedIn',
-        'twitter' => 'Twitter'
     ];
 
     foreach ($options as $index => $social) {

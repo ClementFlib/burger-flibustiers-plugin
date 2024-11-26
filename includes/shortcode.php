@@ -44,7 +44,34 @@ function burger_menu_shortcode($atts) {
 
     <div id="burger-menu" class="<?php echo esc_attr($animation_class); ?>">
 
-        <?php echo generate_menu_html_recursive($menu_tree, 0, $animation_class); ?>
+        <?php echo generate_menu_html_recursive($menu_tree, 0, $animation_class); 
+
+        $socials = get_option('burger_flibustiers_social_links', []);
+        if ($socials) {
+            echo '<div class="social-links">';
+            foreach ($socials as $social) {
+                echo '<a href="' . esc_url($social['url']) . '" target="_blank" class="social-link social-link-' . esc_attr($social['network']) . '">';
+                switch ($social['network']) {
+                    case 'facebook':
+                        echo '<span class="dashicons dashicons-facebook"></span>';
+                        break;
+                    case 'youtube':
+                        echo '<span class="dashicons dashicons-youtube"></span>';
+                        break;
+                    case 'instagram':
+                        echo '<span class="dashicons dashicons-instagram"></span>';
+                        break;
+                    case 'linkedin':
+                        echo '<span class="dashicons dashicons-linkedin"></span>';
+                        break;
+                }
+                echo '</a>';
+            }
+            echo '</div>';
+        }
+
+        ?>
+
     </div>
     
     <?php
