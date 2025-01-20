@@ -68,3 +68,10 @@ document.addEventListener('click', function(event) {
         });
     }
 });
+
+const currentUrl = window.location.href;
+document.querySelectorAll('.burger-menu-list li a').forEach(link => {
+    if (link.href === currentUrl) {
+        link.classList.add('active-page');
+    }
+});

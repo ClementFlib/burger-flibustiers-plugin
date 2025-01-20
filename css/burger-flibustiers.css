@@ -146,6 +146,10 @@
 }
 
 /* Icones de réseaux sociaux */
+.social-links{
+  margin-top: 15px;
+}
+
 .social-links a {
   display: inline-block;
   padding: 5px 10px;
@@ -153,7 +157,6 @@
   color: #fff;
   text-decoration: none;
   border-radius: 3px;
-  font-size: 20px;
 }
 
 .social-link-facebook,
@@ -161,11 +164,13 @@
 .social-link-instagram,
 .social-link-linkedin,
 .social-link-twitter
- { background-color: currentColor; }
+ { background-color: transparent; }
 
 
 .social-links .dashicons {
   vertical-align: middle;
+  color: currentColor;
+  font-size: 30px;
 }
 
 .menu-level {

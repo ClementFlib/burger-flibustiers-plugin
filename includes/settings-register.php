@@ -22,6 +22,15 @@ function burger_flibustiers_settings_init() {
         'burger_flibustiers_section'            // Section à laquelle ce champ appartient
     );
 
+    //Couleur de la font
+    add_settings_field(
+        'burger_flibustiers_active_color',
+        'Couleur des liens actifs',
+        'burger_flibustiers_active_color_render',
+        'burgerFlibustiers',
+        'burger_flibustiers_section'
+    );
+
     // Font family
     add_settings_field(
         'burger_flibustiers_font',
@@ -31,14 +40,32 @@ function burger_flibustiers_settings_init() {
         'burger_flibustiers_section'
     );
 
+    // Styles des onglets
+    add_settings_field(
+        'burger_flibustiers_typo_styles',
+        'Style de la typo',
+        'burger_flibustiers_typo_styles_render',
+        'burgerFlibustiers',
+        'burger_flibustiers_section'
+    );
+
     // Couleur de fond du menu
     add_settings_field(
         'burger_flibustiers_bgcolor',
-        'Couleur de fond',
+        'Couleur de fond du menu',
         'burger_flibustiers_bgcolor_render',
         'burgerFlibustiers',
         'burger_flibustiers_section'
     );
+
+    // Couleur de l'icone burger
+    add_settings_field(
+        'burger_flibustiers_icon_color',
+        'Couleur de l\'icone burger',
+        'burger_flibustiers_icon_color_render',
+        'burgerFlibustiers',
+        'burger_flibustiers_section'
+    ); 
 
     // Animation d'ouverture
     add_settings_field(
@@ -71,6 +98,15 @@ function burger_flibustiers_color_render() {
     $options = get_option('burger_flibustiers_options');
     ?>
     <input type="text" name="burger_flibustiers_options[burger_flibustiers_color]" value="<?php echo isset($options['burger_flibustiers_color']) ? esc_attr($options['burger_flibustiers_color']) : ''; ?>" />
+    <p class="description">Entrez une couleur hexadécimale ou un nom de couleur (par ex. #000000 ou noir)</p>
+    <?php
+}
+
+// Rendu du champ couleur
+function burger_flibustiers_active_color_render() {
+    $options = get_option('burger_flibustiers_options');
+    ?>
+    <input type="text" name="burger_flibustiers_options[burger_flibustiers_active_color]" value="<?php echo isset($options['burger_flibustiers_active_color']) ? esc_attr($options['burger_flibustiers_active_color']) : ''; ?>" />
     <p class="description">Entrez une couleur hexadécimale ou un nom de couleur (par ex. #000000 ou noir)</p>
     <?php
 }
@@ -109,11 +145,37 @@ function burger_flibustiers_font_render() {
     <?php
 }
 
+//Style de typo pour les onglets du menu
+function burger_flibustiers_typo_styles_render() {
+    $options = get_option('burger_flibustiers_options');
+    $selected_styles = isset($options['burger_flibustiers_typo_styles']) ? $options['burger_flibustiers_typo_styles'] : [];
+    $styles = [
+        'uppercase' => 'Majuscules', 
+        'bold' => 'Gras', 
+        'underline' => 'Souligné', 
+        'italic' => 'Italique'
+    ];
+
+    foreach ($styles as $key => $label) {
+        $checked = in_array($key, $selected_styles) ? 'checked' : '';
+        echo '<label><input type="checkbox" name="burger_flibustiers_options[burger_flibustiers_typo_styles][]" value="' . esc_attr($key) . '" ' . $checked . '> ' . esc_html($label) . '</label><br>';
+    }
+}
+
 // Rendu du champ background color
 function burger_flibustiers_bgcolor_render() {
     $options = get_option('burger_flibustiers_options');
     ?>
     <input type="text" name="burger_flibustiers_options[burger_flibustiers_bgcolor]" value="<?php echo isset($options['burger_flibustiers_bgcolor']) ? esc_attr($options['burger_flibustiers_bgcolor']) : ''; ?>" />
+    <p class="description">Entrez une couleur hexadécimale ou un nom de couleur (par ex. #000000 ou noir)</p>
+    <?php
+}
+
+// Rendu du champ icon color
+function burger_flibustiers_icon_color_render() {
+    $options = get_option('burger_flibustiers_options');
+    ?>
+    <input type="text" name="burger_flibustiers_options[burger_flibustiers_icon_color]" value="<?php echo isset($options['burger_flibustiers_icon_color']) ? esc_attr($options['burger_flibustiers_icon_color']) : ''; ?>" />
     <p class="description">Entrez une couleur hexadécimale ou un nom de couleur (par ex. #000000 ou noir)</p>
     <?php
 }
