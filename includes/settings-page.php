@@ -16,7 +16,7 @@ function burger_flibustiers_settings_page() {
     <div class="wrap">
         <h1>Réglages du Menu Burger</h1>
         <p>
-            Pour afficher le menu sur une page, vous pouvez utiliser le shortcode <code>[burger_menu]</code>.
+            Pour afficher le menu sur une page, vous pouvez utiliser le shortcode <code>[burger_menu]</code>.<br>
             Pour préciser quel menu vous souhaitez afficher dans le burger, utilisez le shortcode <code>[burger_menu menu="nom_du_menu"]</code> ou <code>"nom_du_menu"</code> est le nom sous lequel vous avez enregistré votre menu dans la section Apparences du backoffice.
         </p>
         <form action="options.php" method="post">

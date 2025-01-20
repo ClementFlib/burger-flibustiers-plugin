@@ -79,13 +79,13 @@
 }
 
 @media(max-width: 1024px){
-  .fliburger, .submenu-container{
+  .fliburger-menu, .submenu-container{
       width: 100%;
   }
 }
 
 @media(max-width: 600px){
-  .fliburger, .submenu-container{
+  .fliburger-menu, .submenu-container{
       overflow-y: scroll;
   }
   .burger-menu-list li a {
