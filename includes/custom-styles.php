@@ -9,7 +9,7 @@ function burger_flibustiers_apply_custom_styles() {
     $font           = isset($options['burger_flibustiers_font']) && $options['burger_flibustiers_font'] !== 'default' ? esc_attr($options['burger_flibustiers_font']) : false;
     
     // Récupération des styles typographiques sélectionnés (tableau de styles cochés)
-    $selected_styles = isset($options['burger_flibustiers_styles']) ? $options['burger_flibustiers_styles'] : [];
+    $selected_styles = isset($options['burger_flibustiers_typo_styles']) ? $options['burger_flibustiers_typo_styles'] : [];
     $style_rules = [];
     // Vérifie quels styles ont été sélectionnés et ajoute les règles CSS correspondantes
     if (in_array('uppercase', $selected_styles)) {

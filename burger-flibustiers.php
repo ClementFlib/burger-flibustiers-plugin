@@ -2,7 +2,7 @@
 /*
 Plugin Name: Fliburger
 Description: Plugin pour ajouter un menu burger dynamique avec un shortcode.
-Version: 3.1.7
+Version: 3.1.8
 Author: Clément GUEZOU - Développeur web chez Les Flibustiers
 */
 
