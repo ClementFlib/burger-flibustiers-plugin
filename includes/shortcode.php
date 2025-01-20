@@ -3,6 +3,7 @@
 function burger_menu_shortcode($atts) {
     $options = get_option('burger_flibustiers_options');
     $animation_class = isset($options['burger_flibustiers_animation']) ? $options['burger_flibustiers_animation'] : 'slide-from-right';
+    $unique_id = 'menu-burger-' . uniqid() . '-' . mt_rand(1000, 9999); //génère un id unique en cas debesoin de plusieurs instances du menu
 
     $atts = shortcode_atts(array(
         'menu' => '', // Nom du menu tel qu'enregistré dans WordPress
@@ -36,13 +37,13 @@ function burger_menu_shortcode($atts) {
     // Générer le HTML récursivement
     ob_start();
     ?>
-    <div id="burger-menu-icon">
+    <div id="<?php echo esc_attr($unique_id).'-icon'; ?>" class="fliburger-icon">
         <span></span>
         <span></span>
         <span></span>
     </div>
 
-    <div id="burger-menu" class="<?php echo esc_attr($animation_class); ?>">
+    <div id="<?php echo esc_attr($unique_id); ?>" class="fliburger-menu <?php echo esc_attr($animation_class); ?>">
 
         <?php echo generate_menu_html_recursive($menu_tree, 0, $animation_class); 
 
