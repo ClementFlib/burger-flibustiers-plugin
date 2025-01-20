@@ -3,7 +3,7 @@ document.querySelectorAll('.fliburger-icon').forEach(icon => {
     icon.addEventListener('click', function() {
 
         // Trouver le menu correspondant à l'icône
-        const menu = this.closest('.fliburger-menu');
+        const menu = icon.closest('.fliburger-menu');
 
         // Toggle l'état ouvert/fermé du menu burger
         if (menu) {
@@ -17,7 +17,7 @@ document.querySelectorAll('.fliburger-icon').forEach(icon => {
         });
 
         // Toggle la classe active sur l'icône cliquée
-        this.classList.toggle('open');
+        icon.classList.toggle('open');
 
     });
 });
