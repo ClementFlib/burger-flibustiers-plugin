@@ -2,8 +2,10 @@
 document.querySelectorAll('.fliburger-icon').forEach(icon => {
     icon.addEventListener('click', function() {
 
-        // Trouver le menu correspondant à l'icône
-        const menu = icon.closest('.fliburger-menu');
+        const uniqueId = icon.id.replace('-icon', '');
+
+        // Trouver le menu correspondant en utilisant l'ID unique
+        const menu = document.getElementById(uniqueId);
 
         // Toggle l'état ouvert/fermé du menu burger
         if (menu) {
@@ -55,11 +57,14 @@ menuItems.forEach(item => {
     });
 });
 
-// Ajouter un écouteur global pour détecter les clics en dehors du menu et refermer le menu
+// Fermer le menu burger si on clique en dehors
 document.addEventListener('click', function(event) {
-    document.querySelectorAll('.fliburger-menu').forEach(menu => {
-        if (!menu.contains(event.target) && !event.target.classList.contains('fliburger-icon')) {
+    if (!event.target.closest('.fliburger-icon') && !event.target.closest('.fliburger-menu')) {
+        document.querySelectorAll('.fliburger-menu').forEach(menu => {
             menu.classList.remove('open');
-        }
-    });
+        });
+        document.querySelectorAll('.fliburger-icon').forEach(icon => {
+            icon.classList.remove('open');
+        });
+    }
 });
