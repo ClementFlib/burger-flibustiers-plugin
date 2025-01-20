@@ -1,15 +1,25 @@
 //Icone ouverture/fermeture/reset menu
-document.getElementById('burger-menu-icon').addEventListener('click', function() {
-	// Toggle l'état ouvert/fermé du menu burger
-	document.getElementById('burger-menu').classList.toggle('open');
-	this.classList.toggle('open');
+document.querySelectorAll('.fliburger-icon').forEach(icon => {
+    icon.addEventListener('click', function() {
 
-	const submenus = document.querySelectorAll('.submenu-container');
-	submenus.forEach(submenu => {
-	
-		// masquer tous les sous-menus ouverts
-		submenu.classList.remove('open');
-	});
+        // Trouver le menu correspondant à l'icône
+        const menu = document.querySelector(this.closest('.fliburger-menu'));
+
+        // Toggle l'état ouvert/fermé du menu burger
+        if (menu) {
+            menu.classList.toggle('open');
+        }
+
+        // Fermer tous les sous-menus à l'intérieur de ce conteneur spécifique
+        const submenus = menu.querySelectorAll('.submenu-container');
+        submenus.forEach(submenu => {
+            submenu.classList.remove('open');
+        });
+
+        // Toggle la classe active sur l'icône cliquée
+        this.classList.toggle('open');
+
+    });
 });
 
 // Ouverture des sous-menus
@@ -41,6 +51,15 @@ menuItems.forEach(item => {
             }
         } else if (link) {
             return; // Permet au navigateur de suivre le lien normalement
+        }
+    });
+});
+
+// Ajouter un écouteur global pour détecter les clics en dehors du menu et refermer le menu
+document.addEventListener('click', function(event) {
+    document.querySelectorAll('.fliburger-menu').forEach(menu => {
+        if (!menu.contains(event.target) && !event.target.classList.contains('fliburger-icon')) {
+            menu.classList.remove('open');
         }
     });
 });
