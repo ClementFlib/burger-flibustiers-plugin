@@ -90,7 +90,7 @@ function generate_menu_html_recursive($menu_tree, $parent_id, $class) {
         $has_children = isset($menu_tree[$item->ID]);
 
         $output .= '<li class="menu-item" data-item-id="' . esc_attr($item->ID) . '">';
-        $output .= '<a href="' . esc_url($item->url) . '" class="menu-link">' . esc_html($item->title) . '</a>';
+        $output .= '<a href="' . esc_url($item->url) . '" class="menu-link">' . $item->title . '</a>';
 
         // Si l'élément a des enfants, appeler la fonction récursive
         if ($has_children) {
